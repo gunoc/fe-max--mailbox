@@ -1,0 +1,46 @@
+body {
+  border: 1px solid #000;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  padding: 20px;
+}
+
+.layout {
+  width: 100%;
+  display: flex;
+  padding: 0 0 30px 30px;
+}
+
+.land-area {
+  border: 1px solid #000;
+  width: 70%;
+  height: 500px;
+  padding: 20px 0;
+}
+
+.info-area {
+  padding: 0 20px;
+  width: 30%;
+}
+
+.info-text {
+  margin-top: 20px;
+  border: 1px solid black;
+  padding: 20px 15px;
+  word-break: keep-all;
+  line-height: 30px;
+}
+
+button {
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+  padding: 5px 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
