@@ -16,11 +16,31 @@ h1 {
   padding: 0 0 30px 30px;
 }
 
+/*
+원본
 .land-area {
   border: 1px solid #000;
   width: 70%;
   height: 500px;
   padding: 20px 0;
+} */
+
+/* bluevan */
+.land-area {
+  border: 1px solid #000;
+  width: 1000px;
+  height: 800px;
+  padding: 20px 0;
+  position: relative;
+}
+
+.town-area {
+  background-color: aquamarine;
+}
+/* bluevan */
+
+.mail-box {
+  background-color: rgb(184, 0, 0);
 }
 
 .info-area {
@@ -43,4 +63,10 @@ button {
   padding: 5px 15px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.node {
+  width: 100px;
+  height: 100px;
+  background-color: red;
 }
