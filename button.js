@@ -4,11 +4,18 @@ const root = document.body;
 const checkMailboxBtn = customQuerySelector(root, '.mail-check-btn');
 checkMailboxBtn.addEventListener('click', handleClickbutton);
 
-function handleClickbutton() {
+async function handleClickbutton() {
   const mailBoxes = customQuerySelectorAll(root, '.mail-box');
 
+  await delay(1000);
   showInfoTextBox(mailBoxes);
+
+  await delay(1000);
   changeStyleVillagesWithMailbox(mailBoxes);
+}
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function showInfoTextBox(mailBoxes) {
