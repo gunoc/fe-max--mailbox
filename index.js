@@ -7,6 +7,14 @@ const VILLAGE = {
   count: 10,
 };
 
+const MAILBOX = {
+  icon: '📫',
+  minSize: 1,
+  maxSize: 50,
+  percent: 0.5,
+  sizes: new Set(),
+};
+
 function generateVillage() {
   let villageList = [];
 
@@ -59,6 +67,20 @@ function makeVillageList({ villageList, newVillage, landArea }) {
     });
     villageList.push(newVillage);
     landArea.appendChild(element);
+    if (Math.random() < MAILBOX.percent) {
+      let mailboxSize = getRandomMailboxSize(MAILBOX.minSize, MAILBOX.maxSize);
+
+      while (MAILBOX.sizes.has(mailboxSize)) {
+        mailboxSize = getRandomMailboxSize(MAILBOX.minSize, MAILBOX.maxSize);
+      }
+      MAILBOX.sizes.add(mailboxSize);
+
+      const mailbox = document.createElement('div');
+      mailbox.classList.add('mail-box');
+      mailbox.dataset.size = mailboxSize;
+      mailbox.textContent = MAILBOX.icon;
+      newVillageElement.appendChild(mailbox);
+    }
   }
 }
 
