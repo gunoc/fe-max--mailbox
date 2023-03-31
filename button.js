@@ -21,6 +21,7 @@ function showInfoTextBox(mailBoxes) {
 function mailboxInfo(mailBoxes) {
   const mailboxsData = setVillagesWithMailbox(mailBoxes);
   totalVillagesWithMailbox(mailboxsData);
+  sortVillagesWithMailbox(mailboxsData);
 }
 
 function setVillagesWithMailbox(mailBoxes) {
@@ -42,8 +43,29 @@ function totalVillagesWithMailbox(mailBoxes) {
   villageInfoEl.textContent = `${villageNames} 총 ${villageCount}개의 마을 입니다.`;
 }
 
+function sortVillagesWithMailbox(mailBoxes) {
+  const mailInfoEl = customQuerySelector(root, '.mail-info-text');
+  const sortedSize = sortSize(mailBoxes)
+    .map(box => box.id)
+    .join(', ');
+  mailInfoEl.textContent = `우체통의 크기는 ${sortedSize} 순입니다.`;
+}
+
 function changeStyleVillagesWithMailbox(mailBoxes) {
   mailBoxes.forEach(mailbox => {
     mailbox.parentElement.style.borderColor = 'red';
   });
+}
+
+function sortSize(mailBoxes) {
+  for (let i = 1; i < mailBoxes.length; i++) {
+    let current = mailBoxes[i];
+    let j = i - 1;
+    while (j >= 0 && mailBoxes[j].size < current.size) {
+      mailBoxes[j + 1] = mailBoxes[j];
+      j--;
+    }
+    mailBoxes[j + 1] = current;
+  }
+  return mailBoxes;
 }

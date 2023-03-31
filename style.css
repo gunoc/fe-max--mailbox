@@ -38,7 +38,7 @@ h1 {
 
 .info-text {
   margin-top: 20px;
-  border: 1px solid black;
+  background-color: #caddc9;
   padding: 20px 15px;
   word-break: keep-all;
   line-height: 30px;
@@ -51,4 +51,8 @@ button {
   padding: 5px 15px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
