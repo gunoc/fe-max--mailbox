@@ -18,7 +18,7 @@ const MAILBOX = {
 function generateVillage() {
   let villageList = [];
 
-  return function () {
+  return () => {
     const landArea = customQuerySelector(root, '.land-area');
     const newVillage = {
       id: String.fromCharCode(65 + villageList.length),
@@ -60,13 +60,15 @@ function makeVillageList({ villageList, newVillage, landArea }) {
     !checkOverlap(newVillage, villageList) &&
     isWithinLandArea({ newVillage, landArea })
   ) {
-    const element = createVillage({
+    const newVillageElement = createVillage({
       ...newVillage,
       x: newVillage.x + landArea.offsetLeft,
       y: newVillage.y + landArea.offsetTop,
     });
+
     villageList.push(newVillage);
-    landArea.appendChild(element);
+    landArea.appendChild(newVillageElement);
+
     if (Math.random() < MAILBOX.percent) {
       let mailboxSize = getRandomMailboxSize(MAILBOX.minSize, MAILBOX.maxSize);
 
@@ -98,12 +100,11 @@ function createVillage(village) {
 
 function getRandomMailboxSize(minSize, maxSize) {
   const size = Math.floor(Math.random() * maxSize) + minSize;
-  return `${size}px`;
+  return size;
 }
 
 (function init() {
   const generateVillageFn = generateVillage();
-  const villageList = generateVillageFn();
 
   for (let i = 0; i < VILLAGE.count; i++) {
     generateVillageFn();
