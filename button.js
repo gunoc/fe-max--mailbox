@@ -27,8 +27,8 @@ function showInfoTextBox(mailBoxes) {
 
 function mailboxInfo(mailBoxes) {
   const mailboxsData = setVillagesWithMailbox(mailBoxes);
-  totalVillagesWithMailbox(mailboxsData);
-  sortVillagesWithMailbox(mailboxsData);
+  showTotalVillagesWithMailbox(mailboxsData);
+  showVillagesWithMailbox(sortVillagesWithMailbox(mailboxsData));
 }
 
 function setVillagesWithMailbox(mailBoxes) {
@@ -43,7 +43,7 @@ function setVillagesWithMailbox(mailBoxes) {
   return mailboxsWithIdAndSize;
 }
 
-function totalVillagesWithMailbox(mailBoxes) {
+function showTotalVillagesWithMailbox(mailBoxes) {
   const villageInfoEl = customQuerySelector(root, '.village-info-text');
   const villageCount = mailBoxes.length;
   const villageNames = mailBoxes.map(box => box.id).join(', ');
@@ -51,11 +51,15 @@ function totalVillagesWithMailbox(mailBoxes) {
 }
 
 function sortVillagesWithMailbox(mailBoxes) {
-  const mailInfoEl = customQuerySelector(root, '.mail-info-text');
-  const sortedSize = sortSize(mailBoxes)
+  const sortedMailboxes = sortBySizeAscending(mailBoxes)
     .map(box => box.id)
     .join(', ');
-  mailInfoEl.textContent = `우체통의 크기는 ${sortedSize} 순입니다.`;
+  return sortedMailboxes;
+}
+
+function showVillagesWithMailbox(sortedMailboxes) {
+  const mailInfoEl = customQuerySelector(root, '.mail-info-text');
+  mailInfoEl.textContent = `우체통의 크기는 ${sortedMailboxes} 순입니다.`;
 }
 
 function changeStyleVillagesWithMailbox(mailBoxes) {
@@ -64,7 +68,7 @@ function changeStyleVillagesWithMailbox(mailBoxes) {
   });
 }
 
-function sortSize(mailBoxes) {
+function sortBySizeAscending(mailBoxes) {
   for (let i = 1; i < mailBoxes.length; i++) {
     let current = mailBoxes[i];
     let j = i - 1;

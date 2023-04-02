@@ -8,9 +8,9 @@ export function customQuerySelector(root, selector) {
       return node;
     }
     if (node.children) {
-      for (let i = 0; i < node.children.length; i++) {
-        nodeStack.push(node.children[i]);
-      }
+      Array.from(node.children).forEach(child => {
+        nodeStack.push(child);
+      });
     }
   }
 
@@ -27,9 +27,9 @@ export function customQuerySelectorAll(root, selector) {
       result.push(node);
     }
     if (node.children) {
-      for (let i = 0; i < node.children.length; i++) {
-        nodeStack.push(node.children[i]);
-      }
+      Array.from(node.children).forEach(child => {
+        nodeStack.push(child);
+      });
     }
   }
 

@@ -16,21 +16,24 @@ const MAILBOX = {
 };
 
 function generateVillage() {
-  let villageList = [];
+  const villageList = [];
 
-  return () => {
+  return villageCount => {
     const landArea = customQuerySelector(root, '.land-area');
-    const newVillage = {
-      id: String.fromCharCode(65 + villageList.length),
-      x: Math.floor(Math.random() * (landArea.clientWidth - VILLAGE.maxSize)),
-      y: Math.floor(Math.random() * (landArea.clientHeight - VILLAGE.maxSize)),
-      width: Math.floor(Math.random() * VILLAGE.maxSize) + VILLAGE.minSize,
-      height: Math.floor(Math.random() * VILLAGE.maxSize) + VILLAGE.minSize,
-    };
 
-    makeVillageList({ villageList, newVillage, landArea });
+    for (let i = 0; i < villageCount; i++) {
+      const newVillage = {
+        id: String.fromCharCode(65 + villageList.length),
+        x: Math.floor(Math.random() * (landArea.clientWidth - VILLAGE.maxSize)),
+        y: Math.floor(
+          Math.random() * (landArea.clientHeight - VILLAGE.maxSize)
+        ),
+        width: Math.floor(Math.random() * VILLAGE.maxSize) + VILLAGE.minSize,
+        height: Math.floor(Math.random() * VILLAGE.maxSize) + VILLAGE.minSize,
+      };
 
-    return villageList;
+      makeVillageList({ villageList, newVillage, landArea });
+    }
   };
 }
 
@@ -105,8 +108,5 @@ function getRandomMailboxSize(minSize, maxSize) {
 
 (function init() {
   const generateVillageFn = generateVillage();
-
-  for (let i = 0; i < VILLAGE.count; i++) {
-    generateVillageFn();
-  }
+  generateVillageFn(VILLAGE.count);
 })();
